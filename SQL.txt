@@ -1,0 +1,20 @@
+create table todo
+(id number(3) primary key,
+naiyou varchar(200) not null,
+simekiri DATE,
+tourokubi DATE);
+
+CREATE SEQUENCE todo_id maxvalue 9999999 CYCLE ;
+
+ALTER TABLE todo MODIFY (id number(7) primary key);
+
+SELECT nextval('todo_id ');
+
+SQL> insert into todo values(nextval('todo_id '),'aa',2022/02/24 0:00:00,TO_DATE('2022/02/24 11:56:19','YYYY/MM/DD HH24:MI:SS')) ;
+
+insert into todo values (todo_id.nextval,
+'aa',TO_DATE('2022/02/24 0:00:00','YYYY/MM/DD HH24:MI:SS'),TO_DATE('2022/02/24 11:56:19','YYYY/MM/DD HH24:MI:SS'));
+
+
+
+
