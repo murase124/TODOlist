@@ -16,5 +16,8 @@ insert into todo values (todo_id.nextval,
 'aa',TO_DATE('2022/02/24 0:00:00','YYYY/MM/DD HH24:MI:SS'),TO_DATE('2022/02/24 11:56:19','YYYY/MM/DD HH24:MI:SS'));
 
 
+/////////////
+
+
 
 

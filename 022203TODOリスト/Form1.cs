@@ -66,7 +66,7 @@ namespace _022203TODOリスト
             try
             {
                 dataSet1.ToDoDataTable.Rows.Clear();//ビュー削除
-                string sql = "SELECT * FROM todo";
+                string sql = "SELECT * FROM todo WHERE Delete_Flg = False";
                 OracleConnection conn = new OracleConnection();
 
                 conn.ConnectionString =
@@ -112,7 +112,7 @@ namespace _022203TODOリスト
                 conn.Open();
                 OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
 
-                string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS')) ";
+                string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'), Delete_Flg = False) ";
                 OracleCommand cmd = new OracleCommand();
                 cmd.CommandText = sql;
                 cmd.Connection = conn;
@@ -133,7 +133,7 @@ namespace _022203TODOリスト
         public void delete()
         {
             //データービューからidを取得
-            string nowRow = dataGridView1.CurrentRow.Cells["naiyou"].Value.ToString();
+            string nowRow = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             DialogResult dr = MessageBox.Show("id = "+nowRow+"を削除して本当によろしいですか？", "確認", MessageBoxButtons.YesNo);
 
             if (dr == System.Windows.Forms.DialogResult.Yes)
@@ -149,7 +149,8 @@ namespace _022203TODOリスト
 
                     
 
-                    string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
+                    //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
+                    string sql = "UPDATE todo SET Delete_Flg = True WHERE id ='" + nowRow + "'";
                     OracleCommand cmd = new OracleCommand();
                     cmd.CommandText = sql;
                     cmd.Connection = conn;
