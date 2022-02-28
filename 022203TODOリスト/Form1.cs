@@ -70,7 +70,7 @@ namespace _022203TODOリスト
                 OracleConnection conn = new OracleConnection();
 
                 conn.ConnectionString =
-                    "User ID=ora01;Password=oracle;Data Source=192.168.56.12:1521/orcl.nkc.com;";
+                    "oracl";
 
                 conn.Open();
                 using (OracleCommand cmd = new OracleCommand(sql))
@@ -79,7 +79,7 @@ namespace _022203TODOリスト
                     cmd.CommandType = CommandType.Text;
                     using (OracleDataReader reader = cmd.ExecuteReader())
                     {
-                       
+
                         while (reader.Read())
                         {
                             dataSet1.ToDoDataTable.AddToDoDataTableRow(
@@ -100,7 +100,7 @@ namespace _022203TODOリスト
         }
 
         //追加SQL
-        public void insert(in string naiyou,DateTime dey)
+        public void insert(in string naiyou, DateTime dey)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace _022203TODOリスト
                 DateTime localDate = DateTime.Now;
 
                 OracleConnection conn = new OracleConnection();
-                conn.ConnectionString = "User ID=ora01; Password=oracle; Data Source=192.168.56.12/orcl.nkc.com";
+                conn.ConnectionString = "oracle";
                 conn.Open();
                 OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
 
@@ -134,7 +134,7 @@ namespace _022203TODOリスト
         {
             //データービューからidを取得
             string nowRow = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            DialogResult dr = MessageBox.Show("id = "+nowRow+"を削除して本当によろしいですか？", "確認", MessageBoxButtons.YesNo);
+            DialogResult dr = MessageBox.Show("id = " + nowRow + "を削除して本当によろしいですか？", "確認", MessageBoxButtons.YesNo);
 
             if (dr == System.Windows.Forms.DialogResult.Yes)
             {
@@ -143,11 +143,11 @@ namespace _022203TODOリスト
                 {
                     caunt_id--;
                     OracleConnection conn = new OracleConnection();
-                    conn.ConnectionString = "User ID=ora01; Password=oracle; Data Source=192.168.56.12/orcl.nkc.com";
+                    conn.ConnectionString = "oracl";
                     conn.Open();
                     OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
 
-                    
+
 
                     //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
                     string sql = "UPDATE todo SET Delete_Flg = True WHERE id ='" + nowRow + "'";
@@ -176,6 +176,6 @@ namespace _022203TODOリスト
             }
         }
 
-        
+
     }
 }
