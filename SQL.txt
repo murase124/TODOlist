@@ -10,13 +10,23 @@ ALTER TABLE todo MODIFY (id number(7) primary key);
 
 SELECT nextval('todo_id ');
 
-SQL> insert into todo values(nextval('todo_id '),'aa',2022/02/24 0:00:00,TO_DATE('2022/02/24 11:56:19','YYYY/MM/DD HH24:MI:SS')) ;
+insert into todo values(nextval('todo_id '),'aa',2022/02/24 0:00:00,TO_DATE('2022/02/24 11:56:19','YYYY/MM/DD HH24:MI:SS')) ;
 
 insert into todo values (todo_id.nextval,
 'aa',TO_DATE('2022/02/24 0:00:00','YYYY/MM/DD HH24:MI:SS'),TO_DATE('2022/02/24 11:56:19','YYYY/MM/DD HH24:MI:SS'));
 
 
 /////////////
+
+2022/03/01
+
+ALTER TABLE todo ADD ( Delete_Flg varchar(5));
+
+UPDATE todo SET Delete_Flg = False;
+
+ALTER TABLE todo MODIFY (id number(10));
+
+ALTER SEQUENCE todo_id MAXVALUE 9999999999;// 9,999,999,999
 
 
 

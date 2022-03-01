@@ -54,6 +54,7 @@ namespace _022203TODOリスト
             this.textBox_naiyou.Name = "textBox_naiyou";
             this.textBox_naiyou.Size = new System.Drawing.Size(604, 56);
             this.textBox_naiyou.TabIndex = 1;
+            this.textBox_naiyou.TextChanged += new System.EventHandler(this.textBox_naiyou_TextChanged);
             // 
             // monthCalendar1
             // 
