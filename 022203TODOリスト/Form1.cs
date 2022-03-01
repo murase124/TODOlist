@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
+using System.IO;
 
 namespace _022203TODOリスト
 {
@@ -66,11 +67,10 @@ namespace _022203TODOリスト
             try
             {
                 dataSet1.ToDoDataTable.Rows.Clear();//ビュー削除
-                string sql = "SELECT * FROM todo WHERE Delete_Flg = False";
+                string sql = "SELECT * FROM todo WHERE Delete_Flg = 'False' ORDER BY simekiri";
                 OracleConnection conn = new OracleConnection();
 
-                conn.ConnectionString =
-                    "oracl";
+                conn.ConnectionString = connection();
 
                 conn.Open();
                 using (OracleCommand cmd = new OracleCommand(sql))
@@ -95,7 +95,7 @@ namespace _022203TODOリスト
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -108,11 +108,11 @@ namespace _022203TODOリスト
                 DateTime localDate = DateTime.Now;
 
                 OracleConnection conn = new OracleConnection();
-                conn.ConnectionString = "oracle";
+                conn.ConnectionString = connection();
                 conn.Open();
                 OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
 
-                string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'), Delete_Flg = False) ";
+                string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'), Delete_Flg = 'False') ";
                 OracleCommand cmd = new OracleCommand();
                 cmd.CommandText = sql;
                 cmd.Connection = conn;
@@ -143,14 +143,14 @@ namespace _022203TODOリスト
                 {
                     caunt_id--;
                     OracleConnection conn = new OracleConnection();
-                    conn.ConnectionString = "oracl";
+                    conn.ConnectionString = connection();
                     conn.Open();
                     OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
 
 
 
                     //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
-                    string sql = "UPDATE todo SET Delete_Flg = True WHERE id ='" + nowRow + "'";
+                    string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE id ='" + nowRow + "'";
                     OracleCommand cmd = new OracleCommand();
                     cmd.CommandText = sql;
                     cmd.Connection = conn;
@@ -176,6 +176,20 @@ namespace _022203TODOリスト
             }
         }
 
+        private string connection()
+        {
+            //oracle connection string
 
+            StreamReader sr = new StreamReader(
+        "C:\\Users\\user\\Documents\\GitHub\\Text\\ToDo.txt", Encoding.GetEncoding("Shift_JIS"));
+
+            string text = sr.ReadToEnd();
+
+            sr.Close();
+
+            Console.Write(text);
+
+            return text;
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace _022203TODOリスト
             InitializeComponent();
             this.Text = "登録";
             this.button_OK.Text = "登録";
+            button_OK.Enabled = false;
         }
         public SetFrom(string naiyou, DateTime nowDate)
         {
@@ -31,6 +32,20 @@ namespace _022203TODOリスト
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
 
+        }
+
+        
+
+        private void textBox_naiyou_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBox_naiyou.Text))
+            {
+                button_OK.Enabled = false;
+            }
+            else
+            {
+                button_OK.Enabled = true;
+            }
         }
     }
 }
