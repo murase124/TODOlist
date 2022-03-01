@@ -148,7 +148,6 @@ namespace _022203TODOリスト
                     OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
 
 
-
                     //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
                     string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE id ='" + nowRow + "'";
                     OracleCommand cmd = new OracleCommand();
