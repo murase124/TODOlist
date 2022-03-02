@@ -30,12 +30,29 @@ namespace _022203TODOリスト
 
         private void 削除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            delete();
+            //警告
+            string nowRow = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            DialogResult dr = MessageBox.Show("id = " + nowRow + "を削除して本当によろしいですか？", "確認", MessageBoxButtons.YesNo);
+
+            if (dr == System.Windows.Forms.DialogResult.Yes)
+            {
+                delete();
+            }
+            else if (dr == System.Windows.Forms.DialogResult.No)
+            {
+                MessageBox.Show("Noを押しました。");
+            }
+            else
+            {
+                MessageBox.Show("Yes,No以外の動作");
+            }
+
             Get_Dete();
         }
 
         private void 編集ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            editData();            
             Get_Dete();
         }
 
@@ -43,6 +60,8 @@ namespace _022203TODOリスト
         {
             Get_Dete();
         }
+
+
 
         //追加　フォーム
         private void addData()
@@ -57,6 +76,26 @@ namespace _022203TODOリスト
             {
                 caunt_id++;
                 insert(FrmItem.textBox_naiyou.Text, FrmItem.monthCalendar1.SelectionRange.Start);
+            }
+        }
+
+        //編集　フォーム
+        private void editData()
+        {
+            string naiyou = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+             DateTime.TryParse(dataGridView1.CurrentRow.Cells[2].Value.ToString(), out DateTime simekiri);
+
+            //追加処理　itemhormを表示
+            //モーダル
+            SetFrom FrmItem;
+            FrmItem = new SetFrom(naiyou,simekiri);
+            DialogResult drRet = FrmItem.ShowDialog();
+
+            if (drRet == DialogResult.OK)
+            {
+                caunt_id++;
+                insert(FrmItem.textBox_naiyou.Text, FrmItem.monthCalendar1.SelectionRange.Start);
+                delete();
             }
         }
 
@@ -112,7 +151,7 @@ namespace _022203TODOリスト
                 conn.Open();
                 OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
 
-                string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'), Delete_Flg = 'False') ";
+                string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'),'False')";
                 OracleCommand cmd = new OracleCommand();
                 cmd.CommandText = sql;
                 cmd.Connection = conn;
@@ -134,45 +173,36 @@ namespace _022203TODOリスト
         {
             //データービューからidを取得
             string nowRow = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            DialogResult dr = MessageBox.Show("id = " + nowRow + "を削除して本当によろしいですか？", "確認", MessageBoxButtons.YesNo);
 
-            if (dr == System.Windows.Forms.DialogResult.Yes)
+
+
+
+            try
+            {
+                caunt_id--;
+                OracleConnection conn = new OracleConnection();
+                conn.ConnectionString = connection();
+                conn.Open();
+                OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+
+
+                //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
+                string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE id ='" + nowRow + "'";
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = sql;
+                cmd.Connection = conn;
+                cmd.Transaction = transaction;
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                conn.Close();
+            }
+            catch (Exception ex)
             {
 
-                try
-                {
-                    caunt_id--;
-                    OracleConnection conn = new OracleConnection();
-                    conn.ConnectionString = connection();
-                    conn.Open();
-                    OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
-
-
-                    //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
-                    string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE id ='" + nowRow + "'";
-                    OracleCommand cmd = new OracleCommand();
-                    cmd.CommandText = sql;
-                    cmd.Connection = conn;
-                    cmd.Transaction = transaction;
-                    cmd.ExecuteNonQuery();
-                    transaction.Commit();
-                    conn.Close();
-                }
-                catch (Exception ex)
-                {
-
-                    Console.WriteLine(ex.Message);
-                    MessageBox.Show("失敗");
-                }
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("失敗");
             }
-            else if (dr == System.Windows.Forms.DialogResult.No)
-            {
-                MessageBox.Show("Noを押しました。");
-            }
-            else
-            {
-                MessageBox.Show("Yes,No以外の動作");
-            }
+
         }
 
         private string connection()
