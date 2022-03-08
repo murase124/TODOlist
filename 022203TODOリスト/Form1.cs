@@ -61,6 +61,16 @@ namespace _022203TODOリスト
             Get_Dete();
         }
 
+        private void 編集履歴ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+
+            //追加処理　itemhormを表示
+            //モーダル
+            ALL_DATA Form = new ALL_DATA(this,id);
+            Form.ShowDialog();
+        }
+
 
 
         //追加　フォーム
@@ -82,6 +92,7 @@ namespace _022203TODOリスト
         //編集　フォーム
         private void editData()
         {
+            string id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             string naiyou = dataGridView1.CurrentRow.Cells[1].Value.ToString();
              DateTime.TryParse(dataGridView1.CurrentRow.Cells[2].Value.ToString(), out DateTime simekiri);
 
@@ -94,7 +105,7 @@ namespace _022203TODOリスト
             if (drRet == DialogResult.OK)
             {
                 caunt_id++;
-                insert(FrmItem.textBox_naiyou.Text, FrmItem.monthCalendar1.SelectionRange.Start);
+                insert(FrmItem.textBox_naiyou.Text, FrmItem.monthCalendar1.SelectionRange.Start,id);
                 delete();
             }
         }
@@ -125,12 +136,15 @@ namespace _022203TODOリスト
                                 reader["id"].ToString(),
                                 reader["naiyou"].ToString(),
                                 reader["simekiri"].ToString(),
-                                reader["tourokubi"].ToString()
+                                reader["tourokubi"].ToString(),
+                                reader["delete_flg"].ToString(),
+                                reader["data_id"].ToString()
                             );
                             caunt_id++;
                         }
                     }
                 }
+                conn.Close();
             }
             catch (Exception ex)
             {
@@ -151,7 +165,7 @@ namespace _022203TODOリスト
                 conn.Open();
                 OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
 
-                string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'),'False')";
+                string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'),'False',todo_id.currval)";
                 OracleCommand cmd = new OracleCommand();
                 cmd.CommandText = sql;
                 cmd.Connection = conn;
@@ -167,15 +181,43 @@ namespace _022203TODOリスト
                 MessageBox.Show("失敗");
             }
         }
+        
+        public bool insert(in string naiyou, DateTime dey, string id)
+        {
+            try
+            {
+                caunt_id++;
+                DateTime localDate = DateTime.Now;
+
+                OracleConnection conn = new OracleConnection();
+                conn.ConnectionString = connection();   
+                conn.Open();
+                OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+
+                string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'),'False',"+id+")";
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = sql;
+                cmd.Connection = conn;
+                cmd.Transaction = transaction;
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("失敗");
+                return false;
+            }
+            return true;
+        }
 
         //削除SQL
         public void delete()
         {
             //データービューからidを取得
             string nowRow = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-
-
-
 
             try
             {
@@ -184,7 +226,6 @@ namespace _022203TODOリスト
                 conn.ConnectionString = connection();
                 conn.Open();
                 OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
-
 
                 //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
                 string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE id ='" + nowRow + "'";
@@ -198,12 +239,61 @@ namespace _022203TODOリスト
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("失敗");
             }
+        }
+
+        public bool delete(string nowRow)
+        {
+            //データービューからidを取得
+
+            try
+            {
+                caunt_id--;
+                OracleConnection conn = new OracleConnection();
+                conn.ConnectionString = connection();
+                conn.Open();
+                OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+
+                //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
+                string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE data_id="+nowRow+" AND id!=(select max(id) from todo where data_id= "+nowRow+")";
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = sql;
+                cmd.Connection = conn;
+                cmd.Transaction = transaction;
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("失敗");
+                return false;
+            }
+            return true;
+        }
+
+        private void 全てToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //追加処理　itemhormを表示
+            //モーダル
+            ALL_DATA Form = new ALL_DATA(this);
+            Form.ShowDialog();
+        }
+
+        public void Data_Return(string naiyou, DateTime simekiri, string Data_id)
+        {
+           if(insert( naiyou, simekiri, Data_id))
+            {
+                delete(Data_id);
+            }
+            Get_Dete();
+
 
         }
+
 
         private string connection()
         {
@@ -220,5 +310,7 @@ namespace _022203TODOリスト
 
             return text;
         }
+
+        
     }
 }

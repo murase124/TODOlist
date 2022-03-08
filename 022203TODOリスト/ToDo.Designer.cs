@@ -287,6 +287,10 @@ namespace _022203TODOリスト {
             
             private global::System.Data.DataColumn columntourokubi;
             
+            private global::System.Data.DataColumn columnDelete_FLG;
+            
+            private global::System.Data.DataColumn columnDATA_ID;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public ToDoDataTableDataTable() {
@@ -354,6 +358,22 @@ namespace _022203TODOリスト {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn Delete_FLGColumn {
+                get {
+                    return this.columnDelete_FLG;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn DATA_IDColumn {
+                get {
+                    return this.columnDATA_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -389,13 +409,15 @@ namespace _022203TODOリスト {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ToDoDataTableRow AddToDoDataTableRow(string id, string naiyou, string simekiri, string tourokubi) {
+            public ToDoDataTableRow AddToDoDataTableRow(string id, string naiyou, string simekiri, string tourokubi, string Delete_FLG, string DATA_ID) {
                 ToDoDataTableRow rowToDoDataTableRow = ((ToDoDataTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id,
                         naiyou,
                         simekiri,
-                        tourokubi};
+                        tourokubi,
+                        Delete_FLG,
+                        DATA_ID};
                 rowToDoDataTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowToDoDataTableRow);
                 return rowToDoDataTableRow;
@@ -422,6 +444,8 @@ namespace _022203TODOリスト {
                 this.columnnaiyou = base.Columns["naiyou"];
                 this.columnsimekiri = base.Columns["simekiri"];
                 this.columntourokubi = base.Columns["tourokubi"];
+                this.columnDelete_FLG = base.Columns["Delete_FLG"];
+                this.columnDATA_ID = base.Columns["DATA_ID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -435,6 +459,10 @@ namespace _022203TODOリスト {
                 base.Columns.Add(this.columnsimekiri);
                 this.columntourokubi = new global::System.Data.DataColumn("tourokubi", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntourokubi);
+                this.columnDelete_FLG = new global::System.Data.DataColumn("Delete_FLG", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDelete_FLG);
+                this.columnDATA_ID = new global::System.Data.DataColumn("DATA_ID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATA_ID);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -641,6 +669,38 @@ namespace _022203TODOリスト {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Delete_FLG {
+                get {
+                    try {
+                        return ((string)(this[this.tableToDoDataTable.Delete_FLGColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'ToDoDataTable\' にある列 \'Delete_FLG\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableToDoDataTable.Delete_FLGColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string DATA_ID {
+                get {
+                    try {
+                        return ((string)(this[this.tableToDoDataTable.DATA_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'ToDoDataTable\' にある列 \'DATA_ID\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableToDoDataTable.DATA_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsidNull() {
                 return this.IsNull(this.tableToDoDataTable.idColumn);
             }
@@ -685,6 +745,30 @@ namespace _022203TODOリスト {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SettourokubiNull() {
                 this[this.tableToDoDataTable.tourokubiColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDelete_FLGNull() {
+                return this.IsNull(this.tableToDoDataTable.Delete_FLGColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDelete_FLGNull() {
+                this[this.tableToDoDataTable.Delete_FLGColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDATA_IDNull() {
+                return this.IsNull(this.tableToDoDataTable.DATA_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDATA_IDNull() {
+                this[this.tableToDoDataTable.DATA_IDColumn] = global::System.Convert.DBNull;
             }
         }
         

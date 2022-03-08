@@ -28,7 +28,13 @@ ALTER TABLE todo MODIFY (id number(10));
 
 ALTER SEQUENCE todo_id MAXVALUE 9999999999;// 9,999,999,999
 
+2022/01/08
 
+ALTER TABLE todo ADD ( data_id number(10));
+
+UPDATE todo SET data_id=1 WHERE naiyou='aa';
+UPDATE todo SET data_id=2 WHERE naiyou='bb';
+UPDATE todo SET data_id=23 WHERE naiyou='cc';
 
 
 
