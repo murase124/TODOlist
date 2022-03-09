@@ -66,5 +66,10 @@ namespace _022203TODOリスト
                 }
             }
         }
+
+        private void SetFrom_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

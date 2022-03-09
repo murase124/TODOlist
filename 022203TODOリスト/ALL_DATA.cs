@@ -42,103 +42,60 @@ namespace _022203TODOリスト
             string sql = "SELECT * FROM todo ORDER BY data_id ,id";
             bool flg;
 
-            flg = Form1.oracle_value_Get(sql);
+            flg = oracle_value_Get(sql);
             return flg;
-
-            //自分作
-            //try
-            //{
-            //    dataSet11.ToDoDataTable.Rows.Clear();//ビュー削除
-            //    string sql = "SELECT * FROM todo ORDER BY data_id ,id";
-            //    OracleConnection conn = new OracleConnection();
-
-            //    conn.ConnectionString = connection();
-
-            //    conn.Open();
-            //    using (OracleCommand cmd = new OracleCommand(sql))
-            //    {
-            //        cmd.Connection = conn;
-            //        cmd.CommandType = CommandType.Text;
-            //        using (OracleDataReader reader = cmd.ExecuteReader())
-            //        {
-
-            //            while (reader.Read())
-            //            {
-            //                dataSet11.ToDoDataTable.AddToDoDataTableRow(
-            //                    reader["id"].ToString(),
-            //                    reader["naiyou"].ToString(),
-            //                    reader["simekiri"].ToString(),
-            //                    reader["tourokubi"].ToString(),
-            //                    reader["delete_flg"].ToString(),
-            //                    reader["data_id"].ToString()
-            //                );
-            //            }
-            //        }
-            //    }
-            //    conn.Close();
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
         }
         public bool Get_Select_Dete()
         {
             string sql = "SELECT * FROM todo WHERE data_id = (select data_id from todo WHERE id=" + id + ") ORDER BY data_id ,id";
             bool flg;
 
-            flg = Form1.oracle_value_Get(sql);
+            flg = oracle_value_Get(sql);
             return flg;
+        }
 
+        private bool oracle_value_Get(string sql)
+        {
             //自分作
-            //try
-            //{
-            //    dataSet11.ToDoDataTable.Rows.Clear();//ビュー削除
-            //    string sql = "SELECT * FROM todo WHERE data_id = (select data_id from todo WHERE id=" + id + ") ORDER BY data_id ,id";
-            //    OracleConnection conn = new OracleConnection();
-            //    conn.ConnectionString = connection();
-            //    conn.Open();
-            //    using (OracleCommand cmd = new OracleCommand(sql))
-            //    {
-            //        cmd.Connection = conn;
-            //        cmd.CommandType = CommandType.Text;
-            //        using (OracleDataReader reader = cmd.ExecuteReader())
-            //        {
-            //            while (reader.Read())
-            //            {
-            //                dataSet11.ToDoDataTable.AddToDoDataTableRow(
-            //                    reader["id"].ToString(),
-            //                    reader["naiyou"].ToString(),
-            //                    reader["simekiri"].ToString(),
-            //                    reader["tourokubi"].ToString(),
-            //                    reader["delete_flg"].ToString(),
-            //                    reader["data_id"].ToString()
-            //                );
-            //            }
-            //        }
-            //    }
-            //    conn.Close();
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
+            try
+            {
+                dataSet11.ToDoDataTable.Rows.Clear();//ビュー削除
+                OracleConnection conn = new OracleConnection();
+                conn.ConnectionString = connection();
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(sql))
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandType = CommandType.Text;
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            dataSet11.ToDoDataTable.AddToDoDataTableRow(
+                                reader["id"].ToString(),
+                                reader["naiyou"].ToString(),
+                                reader["simekiri"].ToString(),
+                                reader["tourokubi"].ToString(),
+                                reader["delete_flg"].ToString(),
+                                reader["data_id"].ToString()
+                            );
+                        }
+                    }
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            return true;
         }
 
         private string connection()
         {
             //oracle connection string
-
-            StreamReader sr = new StreamReader(
-        "C:\\Users\\user\\Documents\\GitHub\\Text\\ToDo.txt", Encoding.GetEncoding("Shift_JIS"));
-
-            string text = sr.ReadToEnd();
-
-            sr.Close();
-
-            Console.Write(text);
+            string text = Form1.connection();
 
             return text;
         }
@@ -148,15 +105,23 @@ namespace _022203TODOリスト
             string message = "完了"; 
             try
             {
-                DateTime.TryParse(dataGridView1.CurrentRow.Cells[2].Value.ToString(), out DateTime simekiri);
-                DateTime.TryParse(dataGridView1.CurrentRow.Cells[2].Value.ToString(), out DateTime tourokubi);
+                DateTime.TryParse(dataGridView1.CurrentRow.Cells[3].Value.ToString(), out DateTime simekiri);
 
-                Form1.Data_Return(
-                     dataGridView1.CurrentRow.Cells[1].Value.ToString(),
+                if(Form1.Data_Return(
+                     dataGridView1.CurrentRow.Cells[2].Value.ToString(),
                       simekiri,
-                     dataGridView1.CurrentRow.Cells[5].Value.ToString());
+                     dataGridView1.CurrentRow.Cells[1].Value.ToString()))
+                {
 
-                Get_ALL_Dete();
+                }
+                if (id == null)
+                {
+                    Get_ALL_Dete();
+                }
+                else
+                {
+                    Get_Select_Dete();
+                }
             }
             catch(Exception ex)
             {
@@ -164,6 +129,19 @@ namespace _022203TODOリスト
                 message = "失敗";
             }
             MessageBox.Show(message);
+        }
+
+        private void 更新ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (id == null)
+            {
+                Get_ALL_Dete();
+            }
+            else
+            {
+                Get_Select_Dete();
+            }
+
         }
     }
 }

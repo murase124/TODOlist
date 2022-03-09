@@ -31,10 +31,6 @@ namespace _022203TODOリスト
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.naiyouDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simekiriDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tourokubiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toDoDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1 = new _022203TODOリスト.DataSet1();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -44,6 +40,11 @@ namespace _022203TODOリスト
             this.更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.編集履歴ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.全てToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATA_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.naiyouDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simekiriDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tourokubiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toDoDataTableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -56,50 +57,19 @@ namespace _022203TODOリスト
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
+            this.DATA_ID,
             this.naiyouDataGridViewTextBoxColumn,
             this.simekiriDataGridViewTextBoxColumn,
             this.tourokubiDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.toDoDataTableBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 36);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 33);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(800, 414);
+            this.dataGridView1.Size = new System.Drawing.Size(800, 417);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            // 
-            // naiyouDataGridViewTextBoxColumn
-            // 
-            this.naiyouDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.naiyouDataGridViewTextBoxColumn.DataPropertyName = "naiyou";
-            this.naiyouDataGridViewTextBoxColumn.HeaderText = "naiyou";
-            this.naiyouDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.naiyouDataGridViewTextBoxColumn.Name = "naiyouDataGridViewTextBoxColumn";
-            // 
-            // simekiriDataGridViewTextBoxColumn
-            // 
-            this.simekiriDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.simekiriDataGridViewTextBoxColumn.DataPropertyName = "simekiri";
-            this.simekiriDataGridViewTextBoxColumn.HeaderText = "simekiri";
-            this.simekiriDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.simekiriDataGridViewTextBoxColumn.Name = "simekiriDataGridViewTextBoxColumn";
-            // 
-            // tourokubiDataGridViewTextBoxColumn
-            // 
-            this.tourokubiDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.tourokubiDataGridViewTextBoxColumn.DataPropertyName = "tourokubi";
-            this.tourokubiDataGridViewTextBoxColumn.HeaderText = "tourokubi";
-            this.tourokubiDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.tourokubiDataGridViewTextBoxColumn.Name = "tourokubiDataGridViewTextBoxColumn";
             // 
             // toDoDataTableBindingSource
             // 
@@ -124,51 +94,93 @@ namespace _022203TODOリスト
             this.全てToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 33);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // 登録ToolStripMenuItem
             // 
             this.登録ToolStripMenuItem.Name = "登録ToolStripMenuItem";
-            this.登録ToolStripMenuItem.Size = new System.Drawing.Size(64, 32);
+            this.登録ToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
             this.登録ToolStripMenuItem.Text = "登録";
             this.登録ToolStripMenuItem.Click += new System.EventHandler(this.登録ToolStripMenuItem_Click);
             // 
             // 削除ToolStripMenuItem
             // 
             this.削除ToolStripMenuItem.Name = "削除ToolStripMenuItem";
-            this.削除ToolStripMenuItem.Size = new System.Drawing.Size(64, 32);
+            this.削除ToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
             this.削除ToolStripMenuItem.Text = "削除";
             this.削除ToolStripMenuItem.Click += new System.EventHandler(this.削除ToolStripMenuItem_Click);
             // 
             // 編集ToolStripMenuItem
             // 
             this.編集ToolStripMenuItem.Name = "編集ToolStripMenuItem";
-            this.編集ToolStripMenuItem.Size = new System.Drawing.Size(64, 32);
+            this.編集ToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
             this.編集ToolStripMenuItem.Text = "編集";
             this.編集ToolStripMenuItem.Click += new System.EventHandler(this.編集ToolStripMenuItem_Click);
             // 
             // 更新ToolStripMenuItem
             // 
             this.更新ToolStripMenuItem.Name = "更新ToolStripMenuItem";
-            this.更新ToolStripMenuItem.Size = new System.Drawing.Size(64, 32);
+            this.更新ToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
             this.更新ToolStripMenuItem.Text = "更新";
             this.更新ToolStripMenuItem.Click += new System.EventHandler(this.更新ToolStripMenuItem_Click);
             // 
             // 編集履歴ToolStripMenuItem
             // 
             this.編集履歴ToolStripMenuItem.Name = "編集履歴ToolStripMenuItem";
-            this.編集履歴ToolStripMenuItem.Size = new System.Drawing.Size(100, 32);
+            this.編集履歴ToolStripMenuItem.Size = new System.Drawing.Size(100, 29);
             this.編集履歴ToolStripMenuItem.Text = "編集履歴";
             this.編集履歴ToolStripMenuItem.Click += new System.EventHandler(this.編集履歴ToolStripMenuItem_Click);
             // 
             // 全てToolStripMenuItem
             // 
             this.全てToolStripMenuItem.Name = "全てToolStripMenuItem";
-            this.全てToolStripMenuItem.Size = new System.Drawing.Size(59, 32);
+            this.全てToolStripMenuItem.Size = new System.Drawing.Size(59, 29);
             this.全てToolStripMenuItem.Text = "全て";
             this.全てToolStripMenuItem.Click += new System.EventHandler(this.全てToolStripMenuItem_Click);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.Width = 57;
+            // 
+            // DATA_ID
+            // 
+            this.DATA_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.DATA_ID.DataPropertyName = "DATA_ID";
+            this.DATA_ID.HeaderText = "DATA_ID";
+            this.DATA_ID.MinimumWidth = 8;
+            this.DATA_ID.Name = "DATA_ID";
+            this.DATA_ID.Width = 110;
+            // 
+            // naiyouDataGridViewTextBoxColumn
+            // 
+            this.naiyouDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.naiyouDataGridViewTextBoxColumn.DataPropertyName = "naiyou";
+            this.naiyouDataGridViewTextBoxColumn.HeaderText = "naiyou";
+            this.naiyouDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.naiyouDataGridViewTextBoxColumn.Name = "naiyouDataGridViewTextBoxColumn";
+            // 
+            // simekiriDataGridViewTextBoxColumn
+            // 
+            this.simekiriDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.simekiriDataGridViewTextBoxColumn.DataPropertyName = "simekiri";
+            this.simekiriDataGridViewTextBoxColumn.HeaderText = "simekiri";
+            this.simekiriDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.simekiriDataGridViewTextBoxColumn.Name = "simekiriDataGridViewTextBoxColumn";
+            // 
+            // tourokubiDataGridViewTextBoxColumn
+            // 
+            this.tourokubiDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.tourokubiDataGridViewTextBoxColumn.DataPropertyName = "tourokubi";
+            this.tourokubiDataGridViewTextBoxColumn.HeaderText = "tourokubi";
+            this.tourokubiDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.tourokubiDataGridViewTextBoxColumn.Name = "tourokubiDataGridViewTextBoxColumn";
             // 
             // Form1
             // 
@@ -199,12 +211,13 @@ namespace _022203TODOリスト
         private DataSet1 dataSet1;
         private System.Windows.Forms.ToolStripMenuItem 編集ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 更新ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 編集履歴ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 全てToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DATA_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn naiyouDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simekiriDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tourokubiDataGridViewTextBoxColumn;
-        private System.Windows.Forms.ToolStripMenuItem 編集履歴ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 全てToolStripMenuItem;
     }
 }
 

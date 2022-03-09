@@ -109,6 +109,7 @@ namespace _022203TODOリスト
             this.Controls.Add(this.label1);
             this.Name = "SetFrom";
             this.Text = "Form2";
+            this.Load += new System.EventHandler(this.SetFrom_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
