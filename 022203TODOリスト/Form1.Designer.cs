@@ -31,6 +31,12 @@ namespace _022203TODOリスト
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.naiyouDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simekiriDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tourokubiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toDoDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1 = new _022203TODOリスト.DataSet1();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.登録ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.削除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,16 +44,10 @@ namespace _022203TODOリスト
             this.更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.編集履歴ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.全てToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.naiyouDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simekiriDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tourokubiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toDoDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1 = new _022203TODOリスト.DataSet1();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toDoDataTableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -68,65 +68,6 @@ namespace _022203TODOリスト
             this.dataGridView1.RowTemplate.Height = 27;
             this.dataGridView1.Size = new System.Drawing.Size(800, 414);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.登録ToolStripMenuItem,
-            this.削除ToolStripMenuItem,
-            this.編集ToolStripMenuItem,
-            this.更新ToolStripMenuItem,
-            this.編集履歴ToolStripMenuItem,
-            this.全てToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 36);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // 登録ToolStripMenuItem
-            // 
-            this.登録ToolStripMenuItem.Name = "登録ToolStripMenuItem";
-            this.登録ToolStripMenuItem.Size = new System.Drawing.Size(64, 30);
-            this.登録ToolStripMenuItem.Text = "登録";
-            this.登録ToolStripMenuItem.Click += new System.EventHandler(this.登録ToolStripMenuItem_Click);
-            // 
-            // 削除ToolStripMenuItem
-            // 
-            this.削除ToolStripMenuItem.Name = "削除ToolStripMenuItem";
-            this.削除ToolStripMenuItem.Size = new System.Drawing.Size(64, 30);
-            this.削除ToolStripMenuItem.Text = "削除";
-            this.削除ToolStripMenuItem.Click += new System.EventHandler(this.削除ToolStripMenuItem_Click);
-            // 
-            // 編集ToolStripMenuItem
-            // 
-            this.編集ToolStripMenuItem.Name = "編集ToolStripMenuItem";
-            this.編集ToolStripMenuItem.Size = new System.Drawing.Size(64, 30);
-            this.編集ToolStripMenuItem.Text = "編集";
-            this.編集ToolStripMenuItem.Click += new System.EventHandler(this.編集ToolStripMenuItem_Click);
-            // 
-            // 更新ToolStripMenuItem
-            // 
-            this.更新ToolStripMenuItem.Name = "更新ToolStripMenuItem";
-            this.更新ToolStripMenuItem.Size = new System.Drawing.Size(64, 30);
-            this.更新ToolStripMenuItem.Text = "更新";
-            this.更新ToolStripMenuItem.Click += new System.EventHandler(this.更新ToolStripMenuItem_Click);
-            // 
-            // 編集履歴ToolStripMenuItem
-            // 
-            this.編集履歴ToolStripMenuItem.Name = "編集履歴ToolStripMenuItem";
-            this.編集履歴ToolStripMenuItem.Size = new System.Drawing.Size(100, 30);
-            this.編集履歴ToolStripMenuItem.Text = "編集履歴";
-            this.編集履歴ToolStripMenuItem.Click += new System.EventHandler(this.編集履歴ToolStripMenuItem_Click);
-            // 
-            // 全てToolStripMenuItem
-            // 
-            this.全てToolStripMenuItem.Name = "全てToolStripMenuItem";
-            this.全てToolStripMenuItem.Size = new System.Drawing.Size(59, 30);
-            this.全てToolStripMenuItem.Text = "全て";
-            this.全てToolStripMenuItem.Click += new System.EventHandler(this.全てToolStripMenuItem_Click);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -170,6 +111,65 @@ namespace _022203TODOリスト
             this.dataSet1.DataSetName = "DataSet1";
             this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.登録ToolStripMenuItem,
+            this.削除ToolStripMenuItem,
+            this.編集ToolStripMenuItem,
+            this.更新ToolStripMenuItem,
+            this.編集履歴ToolStripMenuItem,
+            this.全てToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 36);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 登録ToolStripMenuItem
+            // 
+            this.登録ToolStripMenuItem.Name = "登録ToolStripMenuItem";
+            this.登録ToolStripMenuItem.Size = new System.Drawing.Size(64, 32);
+            this.登録ToolStripMenuItem.Text = "登録";
+            this.登録ToolStripMenuItem.Click += new System.EventHandler(this.登録ToolStripMenuItem_Click);
+            // 
+            // 削除ToolStripMenuItem
+            // 
+            this.削除ToolStripMenuItem.Name = "削除ToolStripMenuItem";
+            this.削除ToolStripMenuItem.Size = new System.Drawing.Size(64, 32);
+            this.削除ToolStripMenuItem.Text = "削除";
+            this.削除ToolStripMenuItem.Click += new System.EventHandler(this.削除ToolStripMenuItem_Click);
+            // 
+            // 編集ToolStripMenuItem
+            // 
+            this.編集ToolStripMenuItem.Name = "編集ToolStripMenuItem";
+            this.編集ToolStripMenuItem.Size = new System.Drawing.Size(64, 32);
+            this.編集ToolStripMenuItem.Text = "編集";
+            this.編集ToolStripMenuItem.Click += new System.EventHandler(this.編集ToolStripMenuItem_Click);
+            // 
+            // 更新ToolStripMenuItem
+            // 
+            this.更新ToolStripMenuItem.Name = "更新ToolStripMenuItem";
+            this.更新ToolStripMenuItem.Size = new System.Drawing.Size(64, 32);
+            this.更新ToolStripMenuItem.Text = "更新";
+            this.更新ToolStripMenuItem.Click += new System.EventHandler(this.更新ToolStripMenuItem_Click);
+            // 
+            // 編集履歴ToolStripMenuItem
+            // 
+            this.編集履歴ToolStripMenuItem.Name = "編集履歴ToolStripMenuItem";
+            this.編集履歴ToolStripMenuItem.Size = new System.Drawing.Size(100, 32);
+            this.編集履歴ToolStripMenuItem.Text = "編集履歴";
+            this.編集履歴ToolStripMenuItem.Click += new System.EventHandler(this.編集履歴ToolStripMenuItem_Click);
+            // 
+            // 全てToolStripMenuItem
+            // 
+            this.全てToolStripMenuItem.Name = "全てToolStripMenuItem";
+            this.全てToolStripMenuItem.Size = new System.Drawing.Size(59, 32);
+            this.全てToolStripMenuItem.Text = "全て";
+            this.全てToolStripMenuItem.Click += new System.EventHandler(this.全てToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
@@ -181,10 +181,10 @@ namespace _022203TODOリスト
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toDoDataTableBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

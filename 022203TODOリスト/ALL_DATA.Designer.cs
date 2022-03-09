@@ -35,12 +35,12 @@ namespace _022203TODOリスト
             this.dataSet11 = new _022203TODOリスト.DataSet1();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.編集履歴ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dATAIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.naiyouDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simekiriDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tourokubiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Delete_FLG = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dATAIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toDoDataTableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).BeginInit();
@@ -55,12 +55,12 @@ namespace _022203TODOリスト
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dATAIDDataGridViewTextBoxColumn,
             this.idDataGridViewTextBoxColumn,
             this.naiyouDataGridViewTextBoxColumn,
             this.simekiriDataGridViewTextBoxColumn,
             this.tourokubiDataGridViewTextBoxColumn,
-            this.Delete_FLG,
-            this.dATAIDDataGridViewTextBoxColumn});
+            this.Delete_FLG});
             this.dataGridView1.DataSource = this.toDoDataTableBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(0, 36);
             this.dataGridView1.Name = "dataGridView1";
@@ -98,6 +98,14 @@ namespace _022203TODOリスト
             this.編集履歴ToolStripMenuItem.Size = new System.Drawing.Size(61, 29);
             this.編集履歴ToolStripMenuItem.Text = "戻す";
             this.編集履歴ToolStripMenuItem.Click += new System.EventHandler(this.編集履歴ToolStripMenuItem_Click);
+            // 
+            // dATAIDDataGridViewTextBoxColumn
+            // 
+            this.dATAIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dATAIDDataGridViewTextBoxColumn.DataPropertyName = "DATA_ID";
+            this.dATAIDDataGridViewTextBoxColumn.HeaderText = "DATA_ID";
+            this.dATAIDDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.dATAIDDataGridViewTextBoxColumn.Name = "dATAIDDataGridViewTextBoxColumn";
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -139,14 +147,6 @@ namespace _022203TODOリスト
             this.Delete_FLG.MinimumWidth = 8;
             this.Delete_FLG.Name = "Delete_FLG";
             // 
-            // dATAIDDataGridViewTextBoxColumn
-            // 
-            this.dATAIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dATAIDDataGridViewTextBoxColumn.DataPropertyName = "DATA_ID";
-            this.dATAIDDataGridViewTextBoxColumn.HeaderText = "DATA_ID";
-            this.dATAIDDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.dATAIDDataGridViewTextBoxColumn.Name = "dATAIDDataGridViewTextBoxColumn";
-            // 
             // ALL_DATA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
@@ -175,11 +175,11 @@ namespace _022203TODOリスト
         private DataSet1 dataSet11;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 編集履歴ToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dATAIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn naiyouDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simekiriDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tourokubiDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Delete_FLG;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dATAIDDataGridViewTextBoxColumn;
     }
 }

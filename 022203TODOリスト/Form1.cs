@@ -14,11 +14,9 @@ namespace _022203TODOリスト
 {
     public partial class Form1 : Form
     {
-        int caunt_id;
         public Form1()
         {
             InitializeComponent();
-            caunt_id = 0;
             Get_Dete();
         }
 
@@ -80,13 +78,7 @@ namespace _022203TODOリスト
             //モーダル
             SetFrom FrmItem;
             FrmItem = new SetFrom();
-            DialogResult drRet = FrmItem.ShowDialog();
-
-            if (drRet == DialogResult.OK)
-            {
-                caunt_id++;
-                insert(FrmItem.textBox_naiyou.Text, FrmItem.monthCalendar1.SelectionRange.Start);
-            }
+            FrmItem.ShowDialog();
         }
 
         //編集　フォーム
@@ -99,180 +91,194 @@ namespace _022203TODOリスト
             //追加処理　itemhormを表示
             //モーダル
             SetFrom FrmItem;
-            FrmItem = new SetFrom(naiyou,simekiri);
-            DialogResult drRet = FrmItem.ShowDialog();
-
-            if (drRet == DialogResult.OK)
-            {
-                caunt_id++;
-                insert(FrmItem.textBox_naiyou.Text, FrmItem.monthCalendar1.SelectionRange.Start,id);
-                delete();
-            }
+            FrmItem = new SetFrom(naiyou,simekiri,id,this);
+            FrmItem.ShowDialog();
         }
 
         //取得　SQL
-        public void Get_Dete()
+        public bool Get_Dete()
         {
+            string sql = "SELECT * FROM todo WHERE Delete_Flg = 'False' ORDER BY simekiri";
+            bool flg;
+
+            flg = oracle_value_Get(sql);
+            return flg;
+
             //自分作
-            try
-            {
-                dataSet1.ToDoDataTable.Rows.Clear();//ビュー削除
-                string sql = "SELECT * FROM todo WHERE Delete_Flg = 'False' ORDER BY simekiri";
-                OracleConnection conn = new OracleConnection();
-
-                conn.ConnectionString = connection();
-
-                conn.Open();
-                using (OracleCommand cmd = new OracleCommand(sql))
-                {
-                    cmd.Connection = conn;
-                    cmd.CommandType = CommandType.Text;
-                    using (OracleDataReader reader = cmd.ExecuteReader())
-                    {
-
-                        while (reader.Read())
-                        {
-                            dataSet1.ToDoDataTable.AddToDoDataTableRow(
-                                reader["id"].ToString(),
-                                reader["naiyou"].ToString(),
-                                reader["simekiri"].ToString(),
-                                reader["tourokubi"].ToString(),
-                                reader["delete_flg"].ToString(),
-                                reader["data_id"].ToString()
-                            );
-                            caunt_id++;
-                        }
-                    }
-                }
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            //try
+            //{
+            //    dataSet1.ToDoDataTable.Rows.Clear();//ビュー削除
+            //    string sql = "SELECT * FROM todo WHERE Delete_Flg = 'False' ORDER BY simekiri";
+            //    OracleConnection conn = new OracleConnection();
+            //    conn.ConnectionString = connection();
+            //    conn.Open();
+            //    using (OracleCommand cmd = new OracleCommand(sql))
+            //    {
+            //        cmd.Connection = conn;
+            //        cmd.CommandType = CommandType.Text;
+            //        using (OracleDataReader reader = cmd.ExecuteReader())
+            //        {
+            //            while (reader.Read())
+            //            {
+            //                dataSet1.ToDoDataTable.AddToDoDataTableRow(
+            //                    reader["id"].ToString(),
+            //                    reader["naiyou"].ToString(),
+            //                    reader["simekiri"].ToString(),
+            //                    reader["tourokubi"].ToString(),
+            //                    reader["delete_flg"].ToString(),
+            //                    reader["data_id"].ToString()
+            //                );
+            //                
+            //            }
+            //        }
+            //    }
+            //    conn.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
         }
 
         //追加SQL
-        public void insert(in string naiyou, DateTime dey)
+        public bool insert(in string naiyou, DateTime dey)
         {
-            try
-            {
-                caunt_id++;
-                DateTime localDate = DateTime.Now;
+            string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'),'False',todo_id.currval)";
 
-                OracleConnection conn = new OracleConnection();
-                conn.ConnectionString = connection();
-                conn.Open();
-                OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+            bool flg;
 
-                string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'),'False',todo_id.currval)";
-                OracleCommand cmd = new OracleCommand();
-                cmd.CommandText = sql;
-                cmd.Connection = conn;
-                cmd.Transaction = transaction;
-                cmd.ExecuteNonQuery();
-                transaction.Commit();
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
+            flg = oracle_Value_editing(sql);
+            return flg;
 
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("失敗");
-            }
+            //try
+            //{
+            //    DateTime localDate = DateTime.Now;
+            //    OracleConnection conn = new OracleConnection();
+            //    conn.ConnectionString = connection();
+            //    conn.Open();
+            //    OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+
+            //    string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'),'False',todo_id.currval)";
+            //    OracleCommand cmd = new OracleCommand();
+            //    cmd.CommandText = sql;
+            //    cmd.Connection = conn;
+            //    cmd.Transaction = transaction;
+            //    cmd.ExecuteNonQuery();
+            //    transaction.Commit();
+            //    conn.Close();
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    Console.WriteLine(ex.Message);
+            //    MessageBox.Show("失敗");
+            //}
         }
-        
+
         public bool insert(in string naiyou, DateTime dey, string id)
         {
-            try
-            {
-                caunt_id++;
-                DateTime localDate = DateTime.Now;
+            string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'),'False'," + id + ")";
+            bool flg;
 
-                OracleConnection conn = new OracleConnection();
-                conn.ConnectionString = connection();   
-                conn.Open();
-                OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+            flg = oracle_Value_editing(sql);
+            return flg;
 
-                string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'),'False',"+id+")";
-                OracleCommand cmd = new OracleCommand();
-                cmd.CommandText = sql;
-                cmd.Connection = conn;
-                cmd.Transaction = transaction;
-                cmd.ExecuteNonQuery();
-                transaction.Commit();
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
+            //try
+            //{
+            //    DateTime localDate = DateTime.Now;
 
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("失敗");
-                return false;
-            }
-            return true;
+            //    OracleConnection conn = new OracleConnection();
+            //    conn.ConnectionString = connection();   
+            //    conn.Open();
+            //    OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+
+            //    string sql = "insert into todo values(todo_id.nextval,'" + naiyou + "',TO_DATE('" + dey + "','YYYY/MM/DD HH24:MI:SS'),TO_DATE('" + DateTime.Now + "','YYYY/MM/DD HH24:MI:SS'),'False',"+id+")";
+            //    OracleCommand cmd = new OracleCommand();
+            //    cmd.CommandText = sql;
+            //    cmd.Connection = conn;
+            //    cmd.Transaction = transaction;
+            //    cmd.ExecuteNonQuery();
+            //    transaction.Commit();
+            //    conn.Close();
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    Console.WriteLine(ex.Message);
+            //    MessageBox.Show("失敗");
+            //    return false;
+            //}
+            //return true;
         }
 
         //削除SQL
-        public void delete()
+        public bool delete()
         {
-            //データービューからidを取得
             string nowRow = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE id ='" + nowRow + "'";
+            bool flg;
 
-            try
-            {
-                caunt_id--;
-                OracleConnection conn = new OracleConnection();
-                conn.ConnectionString = connection();
-                conn.Open();
-                OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+            flg = oracle_Value_editing(sql);
+            return flg;
 
-                //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
-                string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE id ='" + nowRow + "'";
-                OracleCommand cmd = new OracleCommand();
-                cmd.CommandText = sql;
-                cmd.Connection = conn;
-                cmd.Transaction = transaction;
-                cmd.ExecuteNonQuery();
-                transaction.Commit();
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("失敗");
-            }
+            //データービューからidを取得
+            //string nowRow = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            //try
+            //{
+            //    OracleConnection conn = new OracleConnection();
+            //    conn.ConnectionString = connection();
+            //    conn.Open();
+            //    OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+
+            //    //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
+            //    string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE id ='" + nowRow + "'";
+            //    OracleCommand cmd = new OracleCommand();
+            //    cmd.CommandText = sql;
+            //    cmd.Connection = conn;
+            //    cmd.Transaction = transaction;
+            //    cmd.ExecuteNonQuery();
+            //    transaction.Commit();
+            //    conn.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //    MessageBox.Show("失敗");
+            //}
         }
 
         public bool delete(string nowRow)
         {
-            //データービューからidを取得
+            string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE data_id=" + nowRow + " AND id!=(select max(id) from todo where data_id= " + nowRow + ")";
+            bool flg;
 
-            try
-            {
-                caunt_id--;
-                OracleConnection conn = new OracleConnection();
-                conn.ConnectionString = connection();
-                conn.Open();
-                OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+            flg = oracle_Value_editing(sql);
+            return flg;
 
-                //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
-                string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE data_id="+nowRow+" AND id!=(select max(id) from todo where data_id= "+nowRow+")";
-                OracleCommand cmd = new OracleCommand();
-                cmd.CommandText = sql;
-                cmd.Connection = conn;
-                cmd.Transaction = transaction;
-                cmd.ExecuteNonQuery();
-                transaction.Commit();
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("失敗");
-                return false;
-            }
-            return true;
+            //try
+            //{
+            //    OracleConnection conn = new OracleConnection();
+            //    conn.ConnectionString = connection();
+            //    conn.Open();
+            //    OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+
+            //    //string sql = "DELETE FROM todo WHERE id='" + nowRow + "'";
+            //    string sql = "UPDATE todo SET Delete_Flg = 'True' WHERE data_id="+nowRow+" AND id!=(select max(id) from todo where data_id= "+nowRow+")";
+            //    OracleCommand cmd = new OracleCommand();
+            //    cmd.CommandText = sql;
+            //    cmd.Connection = conn;
+            //    cmd.Transaction = transaction;
+            //    cmd.ExecuteNonQuery();
+            //    transaction.Commit();
+            //    conn.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //    MessageBox.Show("失敗");
+            //    return false;
+            //}
+            //return true;
         }
 
         private void 全てToolStripMenuItem_Click(object sender, EventArgs e)
@@ -290,8 +296,73 @@ namespace _022203TODOリスト
                 delete(Data_id);
             }
             Get_Dete();
+        }
 
 
+
+        public bool oracle_value_Get(string sql)
+        {
+            //自分作
+            try
+            {
+                dataSet1.ToDoDataTable.Rows.Clear();//ビュー削除
+                OracleConnection conn = new OracleConnection();
+                conn.ConnectionString = connection();
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(sql))
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandType = CommandType.Text;
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            dataSet1.ToDoDataTable.AddToDoDataTableRow(
+                                reader["id"].ToString(),
+                                reader["naiyou"].ToString(),
+                                reader["simekiri"].ToString(),
+                                reader["tourokubi"].ToString(),
+                                reader["delete_flg"].ToString(),
+                                reader["data_id"].ToString()
+                            );
+                        }
+                    }
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            return true;
+        }
+
+        public bool oracle_Value_editing(string sql)
+        {
+            try
+            {
+                DateTime localDate = DateTime.Now;
+                OracleConnection conn = new OracleConnection();
+                conn.ConnectionString = connection();
+                conn.Open();
+                OracleTransaction transaction = conn.BeginTransaction(IsolationLevel.ReadCommitted);
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = sql;
+                cmd.Connection = conn;
+                cmd.Transaction = transaction;
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("失敗");
+                return false;
+            }
+            return true;
         }
 
 
@@ -309,8 +380,6 @@ namespace _022203TODOリスト
             Console.Write(text);
 
             return text;
-        }
-
-        
+        }        
     }
 }

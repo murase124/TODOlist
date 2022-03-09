@@ -36,87 +36,95 @@ namespace _022203TODOリスト
            
         }
 
-        public void Get_ALL_Dete()
+        public bool Get_ALL_Dete()
         {
 
+            string sql = "SELECT * FROM todo ORDER BY data_id ,id";
+            bool flg;
+
+            flg = Form1.oracle_value_Get(sql);
+            return flg;
+
             //自分作
-            try
-            {
-                dataSet11.ToDoDataTable.Rows.Clear();//ビュー削除
-                string sql = "SELECT * FROM todo ORDER BY data_id ,id";
-                OracleConnection conn = new OracleConnection();
+            //try
+            //{
+            //    dataSet11.ToDoDataTable.Rows.Clear();//ビュー削除
+            //    string sql = "SELECT * FROM todo ORDER BY data_id ,id";
+            //    OracleConnection conn = new OracleConnection();
 
-                conn.ConnectionString = connection();
+            //    conn.ConnectionString = connection();
 
-                conn.Open();
-                using (OracleCommand cmd = new OracleCommand(sql))
-                {
-                    cmd.Connection = conn;
-                    cmd.CommandType = CommandType.Text;
-                    using (OracleDataReader reader = cmd.ExecuteReader())
-                    {
+            //    conn.Open();
+            //    using (OracleCommand cmd = new OracleCommand(sql))
+            //    {
+            //        cmd.Connection = conn;
+            //        cmd.CommandType = CommandType.Text;
+            //        using (OracleDataReader reader = cmd.ExecuteReader())
+            //        {
 
-                        while (reader.Read())
-                        {
-                            dataSet11.ToDoDataTable.AddToDoDataTableRow(
-                                reader["id"].ToString(),
-                                reader["naiyou"].ToString(),
-                                reader["simekiri"].ToString(),
-                                reader["tourokubi"].ToString(),
-                                reader["delete_flg"].ToString(),
-                                reader["data_id"].ToString()
-                            );
-                        }
-                    }
-                }
-                conn.Close();
+            //            while (reader.Read())
+            //            {
+            //                dataSet11.ToDoDataTable.AddToDoDataTableRow(
+            //                    reader["id"].ToString(),
+            //                    reader["naiyou"].ToString(),
+            //                    reader["simekiri"].ToString(),
+            //                    reader["tourokubi"].ToString(),
+            //                    reader["delete_flg"].ToString(),
+            //                    reader["data_id"].ToString()
+            //                );
+            //            }
+            //        }
+            //    }
+            //    conn.Close();
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
         }
-        public void Get_Select_Dete()
+        public bool Get_Select_Dete()
         {
+            string sql = "SELECT * FROM todo WHERE data_id = (select data_id from todo WHERE id=" + id + ") ORDER BY data_id ,id";
+            bool flg;
+
+            flg = Form1.oracle_value_Get(sql);
+            return flg;
 
             //自分作
-            try
-            {
-                dataSet11.ToDoDataTable.Rows.Clear();//ビュー削除
-                string sql = "SELECT * FROM todo WHERE data_id = (select data_id from todo WHERE id=" + id + ") ORDER BY data_id ,id";
-                OracleConnection conn = new OracleConnection();
+            //try
+            //{
+            //    dataSet11.ToDoDataTable.Rows.Clear();//ビュー削除
+            //    string sql = "SELECT * FROM todo WHERE data_id = (select data_id from todo WHERE id=" + id + ") ORDER BY data_id ,id";
+            //    OracleConnection conn = new OracleConnection();
+            //    conn.ConnectionString = connection();
+            //    conn.Open();
+            //    using (OracleCommand cmd = new OracleCommand(sql))
+            //    {
+            //        cmd.Connection = conn;
+            //        cmd.CommandType = CommandType.Text;
+            //        using (OracleDataReader reader = cmd.ExecuteReader())
+            //        {
+            //            while (reader.Read())
+            //            {
+            //                dataSet11.ToDoDataTable.AddToDoDataTableRow(
+            //                    reader["id"].ToString(),
+            //                    reader["naiyou"].ToString(),
+            //                    reader["simekiri"].ToString(),
+            //                    reader["tourokubi"].ToString(),
+            //                    reader["delete_flg"].ToString(),
+            //                    reader["data_id"].ToString()
+            //                );
+            //            }
+            //        }
+            //    }
+            //    conn.Close();
 
-                conn.ConnectionString = connection();
-
-                conn.Open();
-                using (OracleCommand cmd = new OracleCommand(sql))
-                {
-                    cmd.Connection = conn;
-                    cmd.CommandType = CommandType.Text;
-                    using (OracleDataReader reader = cmd.ExecuteReader())
-                    {
-
-                        while (reader.Read())
-                        {
-                            dataSet11.ToDoDataTable.AddToDoDataTableRow(
-                                reader["id"].ToString(),
-                                reader["naiyou"].ToString(),
-                                reader["simekiri"].ToString(),
-                                reader["tourokubi"].ToString(),
-                                reader["delete_flg"].ToString(),
-                                reader["data_id"].ToString()
-                            );
-                        }
-                    }
-                }
-                conn.Close();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
         }
 
         private string connection()
@@ -137,15 +145,25 @@ namespace _022203TODOリスト
 
         private void 編集履歴ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DateTime.TryParse(dataGridView1.CurrentRow.Cells[2].Value.ToString(), out DateTime simekiri);
-            DateTime.TryParse(dataGridView1.CurrentRow.Cells[2].Value.ToString(), out DateTime tourokubi);
+            string message = "完了"; 
+            try
+            {
+                DateTime.TryParse(dataGridView1.CurrentRow.Cells[2].Value.ToString(), out DateTime simekiri);
+                DateTime.TryParse(dataGridView1.CurrentRow.Cells[2].Value.ToString(), out DateTime tourokubi);
 
-           Form1.Data_Return(
-                dataGridView1.CurrentRow.Cells[1].Value.ToString(),
-                 simekiri,
-                dataGridView1.CurrentRow.Cells[5].Value.ToString());
+                Form1.Data_Return(
+                     dataGridView1.CurrentRow.Cells[1].Value.ToString(),
+                      simekiri,
+                     dataGridView1.CurrentRow.Cells[5].Value.ToString());
 
-            Get_ALL_Dete();
+                Get_ALL_Dete();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                message = "失敗";
+            }
+            MessageBox.Show(message);
         }
     }
 }

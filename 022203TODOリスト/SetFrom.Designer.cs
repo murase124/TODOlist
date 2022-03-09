@@ -83,14 +83,15 @@ namespace _022203TODOリスト
             this.button_OK.TabIndex = 3;
             this.button_OK.Text = "登録";
             this.button_OK.UseVisualStyleBackColor = true;
+            this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
             // 
             // button_Cancel
             // 
             this.button_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button_Cancel.Font = new System.Drawing.Font("ＭＳ ゴシック", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button_Cancel.Location = new System.Drawing.Point(610, 385);
+            this.button_Cancel.Location = new System.Drawing.Point(584, 385);
             this.button_Cancel.Name = "button_Cancel";
-            this.button_Cancel.Size = new System.Drawing.Size(152, 36);
+            this.button_Cancel.Size = new System.Drawing.Size(178, 36);
             this.button_Cancel.TabIndex = 3;
             this.button_Cancel.Text = "キャンセル";
             this.button_Cancel.UseVisualStyleBackColor = true;
@@ -119,7 +120,7 @@ namespace _022203TODOリスト
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_OK;
         private System.Windows.Forms.Button button_Cancel;
-        public System.Windows.Forms.MonthCalendar monthCalendar1;
-        public System.Windows.Forms.TextBox textBox_naiyou;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.TextBox textBox_naiyou;
     }
 }

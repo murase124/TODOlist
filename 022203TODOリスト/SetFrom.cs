@@ -12,6 +12,8 @@ namespace _022203TODOリスト
 {
     public partial class SetFrom : Form
     {
+        Form1 Form1;
+        string id = null;
         public SetFrom()
         {
             InitializeComponent();
@@ -19,14 +21,16 @@ namespace _022203TODOリスト
             this.button_OK.Text = "登録";
             button_OK.Enabled = false;
         }
-        public SetFrom(string naiyou, DateTime nowDate)
+        public SetFrom(string naiyou, DateTime nowDate, string id, Form1 Form1)
         {
             InitializeComponent();
             textBox_naiyou.Text = naiyou;
             monthCalendar1.SetDate(nowDate);
-
+            this.id = id;
+            this.Form1 = Form1;
             this.Text = "編集";
             this.button_OK.Text = "完了";
+            
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
@@ -45,6 +49,21 @@ namespace _022203TODOリスト
             else
             {
                 button_OK.Enabled = true;
+            }
+        }
+
+        private void button_OK_Click(object sender, EventArgs e)
+        {
+            if (id == null)
+            {
+                Form1.insert(textBox_naiyou.Text, monthCalendar1.SelectionRange.Start);
+            }
+            else
+            {
+                if (Form1.insert(textBox_naiyou.Text, monthCalendar1.SelectionRange.Start, id))
+                {
+                    Form1.delete();
+                }
             }
         }
     }
