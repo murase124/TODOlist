@@ -101,7 +101,7 @@ namespace _022203TODOリスト
             string sql = "SELECT * FROM todo WHERE Delete_Flg = 'False' ORDER BY simekiri";
             bool flg;
 
-            flg = oracle_value_Get(sql);
+            flg = oracle_value_Get(sql,dataSet1);
             return flg;
         }
 
@@ -172,7 +172,7 @@ namespace _022203TODOリスト
 
 
 
-        private bool oracle_value_Get(string sql)
+        private bool oracle_value_Get(string sql,DataSet1 dataSet1)
         {
             //自分作
             try

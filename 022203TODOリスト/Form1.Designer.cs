@@ -44,7 +44,6 @@ namespace _022203TODOリスト
             this.DATA_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.naiyouDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simekiriDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tourokubiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toDoDataTableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -59,8 +58,7 @@ namespace _022203TODOリスト
             this.idDataGridViewTextBoxColumn,
             this.DATA_ID,
             this.naiyouDataGridViewTextBoxColumn,
-            this.simekiriDataGridViewTextBoxColumn,
-            this.tourokubiDataGridViewTextBoxColumn});
+            this.simekiriDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.toDoDataTableBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 33);
@@ -174,14 +172,6 @@ namespace _022203TODOリスト
             this.simekiriDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.simekiriDataGridViewTextBoxColumn.Name = "simekiriDataGridViewTextBoxColumn";
             // 
-            // tourokubiDataGridViewTextBoxColumn
-            // 
-            this.tourokubiDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.tourokubiDataGridViewTextBoxColumn.DataPropertyName = "tourokubi";
-            this.tourokubiDataGridViewTextBoxColumn.HeaderText = "tourokubi";
-            this.tourokubiDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.tourokubiDataGridViewTextBoxColumn.Name = "tourokubiDataGridViewTextBoxColumn";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
@@ -217,7 +207,6 @@ namespace _022203TODOリスト
         private System.Windows.Forms.DataGridViewTextBoxColumn DATA_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn naiyouDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simekiriDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tourokubiDataGridViewTextBoxColumn;
     }
 }
 

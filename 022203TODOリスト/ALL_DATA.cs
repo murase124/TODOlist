@@ -100,14 +100,28 @@ namespace _022203TODOリスト
             return text;
         }
 
-        private void 編集履歴ToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void 更新ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string message = "完了"; 
+            if (id == null)
+            {
+                Get_ALL_Dete();
+            }
+            else
+            {
+                Get_Select_Dete();
+            }
+
+        }
+
+        private void 戻すToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string message = "完了";
             try
             {
                 DateTime.TryParse(dataGridView1.CurrentRow.Cells[3].Value.ToString(), out DateTime simekiri);
 
-                if(Form1.Data_Return(
+                if (Form1.Data_Return(
                      dataGridView1.CurrentRow.Cells[2].Value.ToString(),
                       simekiri,
                      dataGridView1.CurrentRow.Cells[1].Value.ToString()))
@@ -123,25 +137,12 @@ namespace _022203TODOリスト
                     Get_Select_Dete();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 message = "失敗";
             }
             MessageBox.Show(message);
-        }
-
-        private void 更新ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (id == null)
-            {
-                Get_ALL_Dete();
-            }
-            else
-            {
-                Get_Select_Dete();
-            }
-
         }
     }
 }

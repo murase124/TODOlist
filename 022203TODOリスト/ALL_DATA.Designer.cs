@@ -40,7 +40,7 @@ namespace _022203TODOリスト
             this.toDoDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet11 = new _022203TODOリスト.DataSet1();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.編集履歴ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.戻すToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toDoDataTableBindingSource)).BeginInit();
@@ -134,7 +134,7 @@ namespace _022203TODOリスト
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.編集履歴ToolStripMenuItem,
+            this.戻すToolStripMenuItem,
             this.更新ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -142,12 +142,12 @@ namespace _022203TODOリスト
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // 編集履歴ToolStripMenuItem
+            // 戻すToolStripMenuItem
             // 
-            this.編集履歴ToolStripMenuItem.Name = "編集履歴ToolStripMenuItem";
-            this.編集履歴ToolStripMenuItem.Size = new System.Drawing.Size(61, 29);
-            this.編集履歴ToolStripMenuItem.Text = "戻す";
-            this.編集履歴ToolStripMenuItem.Click += new System.EventHandler(this.編集履歴ToolStripMenuItem_Click);
+            this.戻すToolStripMenuItem.Name = "戻すToolStripMenuItem";
+            this.戻すToolStripMenuItem.Size = new System.Drawing.Size(61, 29);
+            this.戻すToolStripMenuItem.Text = "戻す";
+            this.戻すToolStripMenuItem.Click += new System.EventHandler(this.戻すToolStripMenuItem_Click);
             // 
             // 更新ToolStripMenuItem
             // 
@@ -183,7 +183,7 @@ namespace _022203TODOリスト
         private System.Windows.Forms.BindingSource toDoDataTableBindingSource;
         private DataSet1 dataSet11;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 編集履歴ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 戻すToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn dATAIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn naiyouDataGridViewTextBoxColumn;
